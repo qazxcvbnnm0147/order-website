@@ -129,6 +129,10 @@ public class LoginInfoServlet extends HttpServlet {
             //insert the corresponding user
             String id=request.getParameter("id");
             String password=request.getParameter("password");
+            PreparedStatement stmt=conn.prepareStatement("insert into login (id, password) values (?, ?)");
+            stmt.setString(1, id);
+            stmt.setString(2, password);
+            stmt.executeUpdate();
             //////////////////////////////
             out.println("success");
         }catch(Exception e){

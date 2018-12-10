@@ -39,7 +39,7 @@ public class LoginsServlet extends HttpServlet {
     
     
     private void service1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        response.setContentType("text/plain;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/sample", "app", "app")) {
             //select from login
             //output in id:password style
