@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInfoServlet extends HttpServlet {
     static{
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginInfoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -38,18 +38,12 @@ public class LoginInfoServlet extends HttpServlet {
     
     private void getImpl1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         response.setContentType("application/json");
-        try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/sample", "app", "app")) {
+        try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
             //select from login
             //output in id:password style
             //this time, consider the id parameter
             String id=request.getParameter("id");
-            ResultSet rs=conn.createStatement().executeQuery("select * from login where id='"+id+"'");
-            if(rs.next()){
-                Map map=new HashMap();
-                map.put("id", rs.getString("id"));
-                map.put("password" , rs.getString("password"));
-                out.print(new Gson().toJson(map));
-            }
+            
             //////////////////////////////
         }catch(Exception e){
             throw new ServletException(e);
@@ -58,7 +52,7 @@ public class LoginInfoServlet extends HttpServlet {
     
     private void getImpl2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         response.setContentType("text/plain;charset=UTF-8");
-        try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/sample", "app", "app")) {
+        try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
             //re-implement getImpl1
             //this time reponde in json-format
             //and use gson
@@ -89,15 +83,9 @@ public class LoginInfoServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain;charset=UTF-8");
         try (PrintWriter out=response.getWriter(); 
-                Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/sample", "app", "app")) {
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
             //update the corresponding user
-            String id=request.getParameter("id");
-            String password=request.getParameter("password");
-            PreparedStatement stmt=conn.prepareStatement("update LOGIN set PASSWORD=? where ID=?");
-            stmt.setString(1, password);
-            stmt.setString(2, id);
-            getServletContext().log("id="+id+", pass="+password);
-            int ret=stmt.executeUpdate();
+            
             //////////////////////////////
             out.println(ret);
         }catch(Exception e){
@@ -109,12 +97,9 @@ public class LoginInfoServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain;charset=UTF-8");
         try (PrintWriter out=response.getWriter(); 
-                Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/sample", "app", "app")) {
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
             //delete the corresponding user
-            String id=request.getParameter("id");
-            PreparedStatement stmt=conn.prepareStatement("delete from login where id=?");
-            stmt.setString(1, id);
-            int ret=stmt.executeUpdate();
+            
             //////////////////////////////
             out.println(ret);
         }catch(Exception e){
@@ -125,14 +110,9 @@ public class LoginInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain;charset=UTF-8");
-        try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/sample", "app", "app")) {
+        try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
             //insert the corresponding user
-            String id=request.getParameter("id");
-            String password=request.getParameter("password");
-            PreparedStatement stmt=conn.prepareStatement("insert into login (id, password) values (?, ?)");
-            stmt.setString(1, id);
-            stmt.setString(2, password);
-            stmt.executeUpdate();
+            
             //////////////////////////////
             out.println("success");
         }catch(Exception e){
