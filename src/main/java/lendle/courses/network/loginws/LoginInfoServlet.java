@@ -87,7 +87,7 @@ public class LoginInfoServlet extends HttpServlet {
             //update the corresponding user
             
             //////////////////////////////
-            out.println(ret);
+            //out.println(ret);
         }catch(Exception e){
             throw new ServletException(e);
         }
@@ -101,7 +101,7 @@ public class LoginInfoServlet extends HttpServlet {
             //delete the corresponding user
             
             //////////////////////////////
-            out.println(ret);
+            //out.println(ret);
         }catch(Exception e){
             throw new ServletException(e);
         }
