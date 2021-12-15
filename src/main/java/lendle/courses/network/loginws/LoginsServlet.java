@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginsServlet extends HttpServlet {
     static{
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,18 +40,10 @@ public class LoginsServlet extends HttpServlet {
     
     private void service1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         response.setContentType("application/json;charset=UTF-8");
-        try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/sample", "app", "app")) {
+        try (PrintWriter out=response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
             //select from login
             //output in id:password style
-            List list=new ArrayList();
-            ResultSet rs=conn.createStatement().executeQuery("select * from login");
-            while(rs.next()){
-                Map map=new HashMap();
-                map.put("id", rs.getString("id"));
-                map.put("password" , rs.getString("password"));
-                list.add(map);
-            }
-            out.print(new Gson().toJson(list));
+            
             //////////////////////////////
         }catch(Exception e){
             throw new ServletException(e);
