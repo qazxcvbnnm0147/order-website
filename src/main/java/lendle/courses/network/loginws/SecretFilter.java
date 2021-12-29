@@ -111,7 +111,7 @@ public class SecretFilter implements Filter {
         try {
             HttpServletResponse httpServletResponse=
                     (HttpServletResponse) response;
-            httpServletResponse.sendRedirect("/error.jsp");
+            httpServletResponse.sendRedirect("/login.jsp");
             //chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
