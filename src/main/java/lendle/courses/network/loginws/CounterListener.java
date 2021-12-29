@@ -7,6 +7,7 @@ package lendle.courses.network.loginws;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -16,24 +17,24 @@ import javax.servlet.http.HttpSessionListener;
  * @author user
  */
 public class CounterListener implements HttpSessionListener, ServletRequestListener {
-
+    public static int counter=0;
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        counter++;
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        counter--;
     }
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ((HttpServletRequest)sre.getServletRequest()).getSession();
     }
 }
