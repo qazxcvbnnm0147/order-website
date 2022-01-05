@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>secret!</h1>
+        <a href="logout.jsp">Logout</a>
     </body>
 </html>

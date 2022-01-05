@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -109,9 +110,17 @@ public class SecretFilter implements Filter {
         
         Throwable problem = null;
         try {
+            HttpServletRequest httpServletRequest =
+                    (HttpServletRequest)request;
+            String user = (String)httpServletRequest.getSession().getAttribute("loggedInUser");
+            if(user != null){
+                chain.doFilter(request, response);
+            }
+            else{
             HttpServletResponse httpServletResponse=
                     (HttpServletResponse) response;
             httpServletResponse.sendRedirect("/login.jsp");
+            }
             //chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
