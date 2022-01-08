@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="POST" action="processLogin.jsp">
+        <form method="POST" action="processLogin">
             ID: <input name="id"/><br/>
             Password: <input name="password"/><br/>
             <input type="submit"/>
