@@ -71,8 +71,9 @@
             out.print(ini_min);
             out.print(ini_max);
                    
-              
+        
             
         %>
+        <a href="orderfood.jsp">back to order</a>
     </body>
 </html>

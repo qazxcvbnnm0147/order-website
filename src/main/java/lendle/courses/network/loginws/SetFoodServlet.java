@@ -91,6 +91,12 @@ public class SetFoodServlet extends HttpServlet {
                    response.addCookie(cookie);
                }
            }
+           else
+           {
+               String lie = "no";
+               cookie=new Cookie("lie",lie);
+               response.addCookie(cookie);
+           }
            String string_total= String.valueOf(total);
            out.print(total);
            

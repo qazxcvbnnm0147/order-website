@@ -78,6 +78,9 @@
            
            
         %>
+        <img style="position: absolute; left :0px; top: 300px; bottom: 200px" width="150" height="150" src="./picture/<%=food_main%>.jpg"></img>
+        <img style="position: absolute; left :150px; top: 300px; bottom: 200px" width="150" height="150" src="./picture/<%=food_sub%>.jpg"></img>
+        <img style="position: absolute; left :300px; top: 300px; bottom: 200px" width="150" height="150" src="./picture/<%=drinks%>.jpg"></img>
         <a href="number?buy=1">pay</a>
     </body>
 </html>
