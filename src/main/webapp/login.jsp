@@ -12,6 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <font size="12" color="green">WSKGOOD點餐系統</font><br><!-- comment -->
+        登入會員<br>
         <form method="POST" action="processLogin">
             ID: <input name="id"/><br/>
             Password: <input name="password"/><br/>

@@ -17,7 +17,7 @@
             int ini_max=1;
             int min=1;
             int max=1;
-            String lie="";
+            String nock="";
             Cookie [] cookies=request.getCookies();
             for(Cookie cookie : cookies)
             {
@@ -30,7 +30,9 @@
                     {
                         ini_min=num;
                         ini_max=num;
+                        break;
                     }
+                
                     num++;
                 }
             }
@@ -68,12 +70,19 @@
                 }
                     
             }   
-            out.print(ini_min);
-            out.print(ini_max);
-                   
+      
         
             
         %>
-        <a href="orderfood.jsp">back to order</a>
+        您的取餐號碼為:<%=ini_max%><br>
+        目前取餐號碼為:<%=ini_min%><br>
+        <% 
+            if(ini_max==1)
+            {
+                out.print("您的餐點好了!");
+            }
+        %>
+        <br>
+        <a href="index.jsp">back to order</a>
     </body>
 </html>

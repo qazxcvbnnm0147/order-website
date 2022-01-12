@@ -12,25 +12,37 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="admin/index.jsp">Admin</a>
-        <a href="register.jsp;">New</a>
-        <h1>Hello World!</h1>
+        <a href="admin/index.jsp">登入</a>
+        <a href="register.jsp;">註冊</a><br>
         <%
             String lie="";
             Cookie [] cookies=request.getCookies();
+            String total="";
+            String string_total_combo="";
+            int total_combo;
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("total")){
+                    total=cookie.getValue();
+                    break;
+                }
+            }
             for(Cookie cookie : cookies){
                 if(cookie.getName().equals("lie")){
                     lie=cookie.getValue();
                     break;
                 }
             }
-            out.print(lie);
             if(lie.equals("yes"))
             {
                 %>
-                <jsp:forward page="orderfood.jsp"/>
+                <jsp:forward page="index.jsp"/>
                 <%
-            }                          
+            } 
+            else if(lie.equals("no"))
+            {
+            total_combo = (int)(Float.parseFloat(total)*0.85);
+            string_total_combo= String.valueOf(total_combo);
+            }
             String food_main="";
             cookies=request.getCookies();
             for(Cookie cookie : cookies){
@@ -53,31 +65,34 @@
                     break;
                 }
             } 
-            String total="";
+            
             for(Cookie cookie : cookies){
                 if(cookie.getName().equals("total")){
                     total=cookie.getValue();
                     break;
                 }
             }
-            out.print(food_main);
-            out.print(food_sub);
-            out.print(drinks);
-            out.print(total);
+            
+            
             String discount=request.getParameter("discount");
-            out.print(discount);
+            
+            String string_total_login="";
             if(discount!=null)
             {
                 if ( discount.equals("1")){
                     int total_login;
-                    total_login=(int)(Float.parseFloat(total)*0.9);
-                    String string_total_login= String.valueOf(total_login);
-                    out.print(string_total_login);
+                    total_login=(int)(Float.parseFloat(string_total_combo)*0.9);
+                    string_total_login= String.valueOf(total_login);
+                    
                 }
             }
            
            
         %>
+        請檢察您的餐點,價格為<%=total%><br>
+        經套餐打折後,價格為<%=string_total_combo%><br>
+        經登入打折後,價格為<%=string_total_login%><br>
+        
         <img style="position: absolute; left :0px; top: 300px; bottom: 200px" width="150" height="150" src="./picture/<%=food_main%>.jpg"></img>
         <img style="position: absolute; left :150px; top: 300px; bottom: 200px" width="150" height="150" src="./picture/<%=food_sub%>.jpg"></img>
         <img style="position: absolute; left :300px; top: 300px; bottom: 200px" width="150" height="150" src="./picture/<%=drinks%>.jpg"></img>

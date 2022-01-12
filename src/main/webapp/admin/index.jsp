@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>secret!</h1>
+        <h1>登入成功!</h1>
         <a href="logout.jsp">Logout</a>
         <a href="../checkorder.jsp?discount=1">繼續結帳</a>
     </body>

@@ -85,17 +85,19 @@ public class SetFoodServlet extends HttpServlet {
                    out.print("you lie");
                }
                else{
-                   total = (int)(((float)total)*0.85);
+                   
                    String lie = "no";
                    cookie=new Cookie("lie",lie);
                    response.addCookie(cookie);
                }
            }
-           else
+           else if(combo.equals("no"))
            {
-               String lie = "no";
+               String lie = "noandnocombo";
                cookie=new Cookie("lie",lie);
                response.addCookie(cookie);
+               out.print("you liexxx");
+               
            }
            String string_total= String.valueOf(total);
            out.print(total);

@@ -12,11 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <font size="12" color="green">WSKGOOD點餐系統</font><br><!-- comment -->
+        註冊會員<br>
         <form action="processregister">
             id:<input type="text" name="id" value="" /><br>
             password:<input type="text" name="password" value="" /><br>
             <input type="submit" value="submit" />
         </form>
-        <h1>Hello World!</h1>
     </body>
 </html>

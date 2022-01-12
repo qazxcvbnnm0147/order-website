@@ -46,7 +46,7 @@ public class number extends HttpServlet {
                 counter=0;
             }
             Cookie cookie=new Cookie(String.valueOf(counter),"1");
-            cookie.setMaxAge(20);
+            cookie.setMaxAge(4);
             response.addCookie(cookie);
             response.sendRedirect("number.jsp");
         }
