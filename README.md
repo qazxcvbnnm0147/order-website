@@ -29,11 +29,15 @@
  
   ## 專案展示
 
-### 首頁菜單頁面
-![菜單頁面](https://github.com/qazxcvbnnm0147/order-website/raw/main/assets/menu-page.png)
+### 首頁菜單及購物車頁面
+![菜單頁面](https://github.com/qazxcvbnnm0147/order-website/raw/master/assets/menu-page.png)
 
-### 購物車頁面
-![購物車頁面](https://github.com/qazxcvbnnm0147/order-website/raw/main/assets/cart-page.png)
+### 確認訂單及點數折扣頁面
+![菜單頁面](https://github.com/qazxcvbnnm0147/order-website/raw/master/assets/checkerorder.png)
+
+### 登入頁面
+![菜單頁面](https://github.com/qazxcvbnnm0147/order-website/raw/master/assets/login.png)
 
 ### 訂單進度展示
-![訂單進度展示](https://github.com/qazxcvbnnm0147/order-website/raw/main/assets/order-progress.png)
+![購物車頁面](https://github.com/qazxcvbnnm0147/order-website/raw/master/assets/orderprogess.png)
+
