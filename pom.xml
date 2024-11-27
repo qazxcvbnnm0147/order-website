@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>lendle.courses.network</groupId>
-    <artifactId>LoginWS</artifactId>
+    <artifactId>final_1104625</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>LoginWS</name>
+    <name>final_1104625</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

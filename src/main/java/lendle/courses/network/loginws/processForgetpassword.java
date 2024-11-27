@@ -11,27 +11,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author user
+ * @author qazxc
  */
-@WebServlet(name = "processregister", urlPatterns = {"/processregister"})
-public class processregister extends HttpServlet {
-     static{
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginInfoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-     }
+@WebServlet(name = "processForgetpassword", urlPatterns = {"/processForgetpassword"})
+public class processForgetpassword extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,36 +39,32 @@ public class processregister extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json"); 
         request.setCharacterEncoding("utf-8");
         try (PrintWriter out = response.getWriter(); Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "")) {
             /* TODO output your page here. You may use following sample code. */
-            String id=request.getParameter("id");
-            String password=request.getParameter("password");
-            Statement stmt=conn.createStatement();
-            ResultSet rs=stmt.executeQuery("select * from login where id='"+id+"'");
-            if(rs.next()){
-                out.println("使用者id重複使用,請按上一頁返回註冊");
+          String id = request.getParameter("id");
+          out.print(id);
+         String password = "";
+          PreparedStatement stmt = conn.prepareStatement("select password from login where id = ?");
+            // 設置查詢條件 id = 1
+            stmt.setString(1,  id);
+            try (ResultSet rs1 = stmt.executeQuery()) {
+                if (rs1.next()) {
+                    // 提取 totalprice 資料
+                       password = rs1.getString("password");
+                       Cookie cookie=new Cookie("password",password);
+                       response.addCookie(cookie);
+                       response.sendRedirect("getpassword.jsp");
+                    } else {
+                        System.out.println("No data found");
+                    }
             }
-            else{
-            PreparedStatement ps=conn.prepareStatement(
-                    "insert into login (id, password) values (?,?)");
-            ps.setString(1, id);
-            ps.setString(2, password);
-            if(ps.executeUpdate()==1){
-                 out.println("success");
-                 response.sendRedirect("checkorder.jsp");
-            }else{
-                 out.println("fail");
-            }
-            }
-            
-        }
-        catch(Exception e){
-          throw new ServletException(e);
-        }
-        }
-    
+           
+        } catch (Exception e) {
+         throw new ServletException(e);
+     }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

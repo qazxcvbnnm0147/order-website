@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,6 +60,11 @@ public class processLogin extends HttpServlet {
            if(rs.next()){
                 out.print(rs.getString("password"));
                 if(password.equals(rs.getString("password"))){
+                    int point = rs.getInt("point");
+                    Cookie cookie=new Cookie("user_id",id);
+                    response.addCookie(cookie);
+                    cookie=new Cookie("point",String.valueOf(point));
+                    response.addCookie(cookie);
                     HttpSession session=request.getSession();
                     session.setAttribute("loggedInUser", id);
                     response.sendRedirect("admin/index.jsp");
@@ -68,6 +74,9 @@ public class processLogin extends HttpServlet {
                     out.print("login fail");
                 }
             }
+          else{
+                response.sendRedirect("error.jsp");
+               }
            
         } catch (Exception e) {
          throw new ServletException(e);
